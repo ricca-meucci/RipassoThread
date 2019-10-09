@@ -10,7 +10,7 @@ public class RipassoThread
         Semaphore scrittore = new Semaphore(0);
         Storage s = new Storage();
         Counter c = new Counter("c1", s, lettore, scrittore);
-        Printer p = new Printer("p1", s);
+        Printer p = new Printer("p1", s,lettore,scrittore);
     }
     
 }
