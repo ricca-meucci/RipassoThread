@@ -15,6 +15,6 @@ public class Printer implements Runnable
     public void run()
     {
         while(true)
-            System.out.println(st.count);
+            System.out.println(st.valore);
     }
 }
