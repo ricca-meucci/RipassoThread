@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ripassothread;
 
-/**
- *
- * @author informatica
- */
+import java.util.concurrent.Semaphore;
+
 public class Counter implements Runnable
 {
+    private Semaphore l;
+    private Semaphore s;
     private Storage st;
     private Thread thr;
             
-    public Counter(String Nome, Storage st)
+    public Counter(String Nome, Storage st, Semaphore l, Semaphore s)
     {
+        this.l = l;
+        this.s = s;
         this.st = st;
         this.thr = new Thread(this, Nome);
         thr.start();
@@ -26,8 +23,17 @@ public class Counter implements Runnable
     {
         while(true)
         {
-            st.valore++;
-            Thread.yield();
+            try
+            {
+                s.acquire();
+                st.valore++;
+                Thread.yield();
+                l.release();
+            }
+            catch(InterruptedException e)
+            {
+                System.out.println("THREAD INTERROTTO!");
+            }
         }
     }
     
