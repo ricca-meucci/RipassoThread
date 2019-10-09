@@ -27,6 +27,7 @@ public class Counter implements Runnable
         while(true)
         {
             st.valore++;
+            Thread.yield();
         }
     }
     
