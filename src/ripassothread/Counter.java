@@ -27,7 +27,6 @@ public class Counter implements Runnable
             {
                 s.acquire();
                 st.valore++;
-                Thread.yield();
                 l.release();
             }
             catch(InterruptedException e)
